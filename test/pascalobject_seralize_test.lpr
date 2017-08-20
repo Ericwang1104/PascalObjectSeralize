@@ -1,7 +1,6 @@
 program pascalobject_seralize_test;
 
 {$mode objfpc}{$H+}
-
 uses
   Interfaces, Forms,GuiTestRunner, testfpc_seralizeadapter_test;
 

@@ -5,10 +5,23 @@ unit testfpc_seralizeadapter_test;
 interface
 
 uses
-  Classes, SysUtils, fpc_seralizeadapter, intf_seralizeadapter, Laz_XMLRead,
-  Laz2_DOM, fpcunit, testutils, testregistry;
+  Classes, SysUtils, fpc_seralizeadapter,Forms, intf_seralizeadapter, Laz_XMLRead,
+  Laz2_DOM, laz2_XMLWrite, Laz_XMLWrite, fpcunit, testutils, testregistry;
 
 type
+
+  { TXMLAccessTest }
+
+  TXMLAccessTest=class(TTestCase)
+  private
+    fDoc:TXMLDocument;
+  protected
+    procedure SetUp; override;
+    procedure TearDown; override;
+  published
+    procedure TestReadXML;
+    Procedure TestAccessXMLAttribute;
+  end;
 
   TFpcAdapterTest= class(TTestCase)
   private
@@ -22,6 +35,35 @@ type
 
 implementation
 
+{ TXMLAccessTest }
+
+procedure TXMLAccessTest.SetUp;
+var
+  Path:string;
+begin
+  Path :=GetCurrentDir();
+  ReadXMLFile(fDoc,Path+'\testdata\test.xml');
+end;
+
+procedure TXMLAccessTest.TearDown;
+begin
+  if Assigned(fDoc) then
+  begin
+    FreeAndnil(fDoc);
+  end;
+end;
+
+procedure TXMLAccessTest.TestReadXML;
+begin
+  checkequals(fDoc.NodeName,'aaa');
+
+end;
+
+procedure TXMLAccessTest.TestAccessXMLAttribute;
+begin
+
+end;
+
 procedure TFpcAdapterTest.XMLTest;
 var
   FileName:string;
@@ -29,17 +71,7 @@ var
   node1,Node2:TDOMNode;
   Count :integer;
 begin
-  FileName :='E:\myproject\Mysoftware\test\testdata\test.xml';
-  ReadXMLFile(aDoc,FileName);
-  try
-    Count :=adoc.ChildNodes.Count;
-    Node1 :=adoc.ChildNodes[0];
-    Node2 :=aDoc.ChildNodes[1];
-    checkequals( Node1.NodeName,'aaa');
 
-  finally
-    FreeAndnil(aDoc);
-  end;
 end;
 
 procedure TFpcAdapterTest.SetUp;
@@ -53,7 +85,7 @@ begin
 end;
 
 initialization
-
+  RegisterTest(TXMLAccessTest);
   RegisterTest(TFpcAdapterTest);
 end.
 

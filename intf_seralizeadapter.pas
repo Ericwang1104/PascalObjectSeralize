@@ -12,18 +12,23 @@ const
 type
   { TDataNode }
 
+  { IDataNode }
+
   IDataNode=Interface(IUnknown)
   [DATA_NODE_INTERFACE]
     function GetAttributes(Name: string): string;
     function GetChildItem(Index:integer): IDataNode;
+    function GetNodeName: string;
     function GetValue: string;
     procedure SetAttributes(Name: string; AValue: string);
+    procedure SetNodeNameNodeName(AValue: string);
     procedure SetValue(AValue: variant);
     procedure SetValue(AValue: string);
-
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
+
     Property ChildItem[Index:integer]:IDataNode read GetChildItem;
+    property NodeName:string read GetNodeName write SetNodeNameNodeName;
     property Value:string read GetValue write SetValue;
     property Attributes[Name:string]:string read GetAttributes write SetAttributes;
   end;
