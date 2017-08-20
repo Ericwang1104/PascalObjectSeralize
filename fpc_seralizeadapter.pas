@@ -5,24 +5,26 @@ unit fpc_seralizeadapter;
 interface
 
 uses
-  Classes, SysUtils, intf_seralizeadapter, Laz_XMLRead, Laz2_DOM, Laz_XMLWrite;
+  Classes, SysUtils, intf_seralizeadapter, variants, Laz_XMLRead, Laz2_DOM,
+  Laz_XMLWrite;
 type
 
   { TFPCXmlNode }
   TFPCXmlNode=class(TInterfacedObject,IDataNode)
 
-  strict private
+
     function GetAttributes(Name: string): string;
     function GetChildItem(Index:integer): IDataNode;
     function GetNodeName: string;
-    function GetValue: string;
+    function GetValue: variant;
     procedure SetAttributes(Name: string; AValue: string);
-    procedure SetNodeNameNodeName(AValue: string);
+    procedure SetNodeName(AValue: string);
     procedure SetValue(AValue: variant);
-    procedure SetValue(AValue: string);
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
+    function ChildByName(const Name:string):IDataNode;
   protected
+    fDoc:TDOMDocument;
     fNode:TDOMNode;
     function BuilDataNode(const Node:TDOMNode):IDataNode;
   end;
@@ -34,12 +36,13 @@ type
 
   TFPCXmlAdapter=class(TInterfacedObject,IDataAdapter)
 
-  strict private
 
 
+    function NewDoc:IDataNode;
     function GetRootNode:IDataNode;
     procedure  LoadFromFile(const Filename:string);
     procedure SaveToFile(const FileName:string);
+
   private
     fDoc:TXMLDocument;
   public
@@ -59,6 +62,7 @@ var
   xmlNode:TFPCXmlNode;
 begin
   xmlNode :=TFpcXmlNode.Create;
+  xmlNode.fDoc :=self.fDoc;
   xmlnode.fNode :=Node;
   result :=xmlNode;
 
@@ -83,39 +87,64 @@ begin
   result :=fNode.NodeValue;
 end;
 
-function TFPCXmlNode.GetValue: string;
+function TFPCXmlNode.GetValue: variant;
 begin
   result :=fNode.NodeValue;
 end;
 
 procedure TFPCXmlNode.SetAttributes(Name: string; AValue: string);
+var
+  attr:TDOMNode;
 begin
-  fNode.Attributes.GetNamedItem(Name).NodeValue:=Avalue;
+  attr :=FNode.Attributes.GetNamedItem(Name);
+  if Assigned(Attr) then
+  begin
+    attr.NodeValue:=AValue;
+  end else
+  begin
+    if fNode is TDOMElement then
+    begin
+      (fNode as TDOMElement).SetAttribute(Name,AValue);
+    end else
+    begin
+      assert(false,'this nod is not a element node');
+    end;
+  end;
 end;
 
-procedure TFPCXmlNode.SetNodeNameNodeName(AValue: string);
+procedure TFPCXmlNode.SetNodeName(AValue: string);
 begin
-
+  //
 end;
 
 procedure TFPCXmlNode.SetValue(AValue: variant);
 begin
-
+  fNode.NodeValue :=VarTostr(AValue);
 end;
 
-procedure TFPCXmlNode.SetValue(AValue: string);
-begin
 
-end;
+
 
 function TFPCXmlNode.AddChild(const Name: string): IDataNode;
+var
+  Ele:TDomElement;
 begin
-
+  Ele :=fDoc.CreateElement(Name);
+  fNode.AppendChild(Ele);
+  result :=self.BuilDataNode(Ele);
 end;
 
 function TFPCXmlNode.ChildCount: integer;
 begin
 
+end;
+
+function TFPCXmlNode.ChildByName(const Name: string): IDataNode;
+var
+  Node:TDOMNode;
+begin
+  Node :=FNode.FindNode(Name);
+  result :=BuilDataNode(Node);
 end;
 
 { TFPCXmlAdapter }
@@ -127,12 +156,27 @@ begin
   inherited ;
 end;
 
+function TFPCXmlAdapter.NewDoc: IDataNode;
+var
+  Element:TDomElement;
+begin
+  if Assigned(fDoc) then
+  begin
+    FreeAndNil(fDoc);
+  end;
+  fDoc :=TXMLDocument.Create;
+  Element :=fdoc.CreateElement('XMLObject');
+  Fdoc.AppendChild(Element);
+end;
+
 function TFPCXmlAdapter.GetRootNode: IDataNode;
 var
   xmlNode:TFPCXmlNode;
 begin
   xmlNode :=TFPCXmlNode.Create;
-  xmlNode.fNode :=fDoc;
+  xmlNode.fNode :=fDoc.FirstChild;
+  xmlNode.fDoc :=fDoc;
+  result :=xmlNode;
 end;
 
 procedure TFPCXmlAdapter.LoadFromFile(const Filename: string);
@@ -143,6 +187,7 @@ end;
 
 procedure TFPCXmlAdapter.SaveToFile(const FileName: string);
 begin
+
  WriteXML(fDoc,FileName);
 end;
 

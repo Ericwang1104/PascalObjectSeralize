@@ -21,6 +21,7 @@ type
   published
     procedure TestReadXML;
     Procedure TestAccessXMLAttribute;
+    procedure TestAddAttribute;
   end;
 
   TFpcAdapterTest= class(TTestCase)
@@ -54,22 +55,41 @@ begin
 end;
 
 procedure TXMLAccessTest.TestReadXML;
+var
+  FirstNode:TDOMNode;
 begin
-  checkequals(fDoc.NodeName,'aaa');
+  FirstNode :=fDoc.ChildNodes[0];
+
+  checkequals(FirstNode.NodeName,'XMLOBJECT');
 
 end;
 
 procedure TXMLAccessTest.TestAccessXMLAttribute;
+var
+  FirstNode:TDOMNode;
 begin
+  FirstNode :=fDoc.ChildNodes[0];
+  Checkequals(Firstnode.Attributes.Item[0].NodeValue,'TComponent');
 
+  checkequals(FirstNode.Attributes.GetNamedItem('PersistentType').NodeValue,'TComponent');
+  Checkequals(Firstnode.Attributes.GetNamedItem('ClassType').NodeValue,'TCodeLib');
+end;
+
+procedure TXMLAccessTest.TestAddAttribute;
+var
+  FirstNode:TDOMNode;
+  attrNode:TDOMAttr;
+  attrs:TDOMNamedNodeMap;
+begin
+  FirstNode :=fDoc.ChildNodes[0];
+  attrNode :=fDoc.CreateAttribute('wac');
+  (FirstNode as  TDomElement).SetAttribute('wac','test');
+
+  WriteXML(fDoc,'e:\test.xml');
 end;
 
 procedure TFpcAdapterTest.XMLTest;
-var
-  FileName:string;
-  aDoc:TXMLDocument;
-  node1,Node2:TDOMNode;
-  Count :integer;
+
 begin
 
 end;

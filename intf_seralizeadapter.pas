@@ -19,17 +19,17 @@ type
     function GetAttributes(Name: string): string;
     function GetChildItem(Index:integer): IDataNode;
     function GetNodeName: string;
-    function GetValue: string;
+    function GetValue: variant;
     procedure SetAttributes(Name: string; AValue: string);
-    procedure SetNodeNameNodeName(AValue: string);
+    procedure SetNodeName(AValue: string);
     procedure SetValue(AValue: variant);
-    procedure SetValue(AValue: string);
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
+    function ChildByName(const Name:string):IDataNode;
 
     Property ChildItem[Index:integer]:IDataNode read GetChildItem;
-    property NodeName:string read GetNodeName write SetNodeNameNodeName;
-    property Value:string read GetValue write SetValue;
+    property NodeName:string read GetNodeName write SetNodeName;
+    property Value:variant read GetValue write SetValue;
     property Attributes[Name:string]:string read GetAttributes write SetAttributes;
   end;
 
@@ -37,7 +37,8 @@ type
 
   IDataAdapter=interface(IUnknown)
   [Data_ADAPTER_INTERFACE]
-  function GetRootNode: IDataNode;
+    function NewDoc:IDataNode;
+    function GetRootNode: IDataNode;
     procedure LoadFromFile(const FileName:string);
     procedure SaveToFile(const FileName:string);
     property RootNode:IDataNode read GetRootNode;

@@ -3,31 +3,34 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
-    <Units Count="12">
+    <BuildModes Active="Debug"/>
+    <Units Count="22">
       <Unit0>
         <Filename Value="pascalobject_seralize_test.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
-        <CursorPos Y="10"/>
-        <UsageCount Value="25"/>
+        <EditorIndex Value="8"/>
+        <CursorPos Y="11"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\fpc_seralizeadapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="82"/>
-        <CursorPos X="37" Y="93"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="123"/>
+        <CursorPos X="23" Y="134"/>
+        <UsageCount Value="42"/>
+        <Bookmarks Count="1">
+          <Item0 X="23" Y="134" ID="1"/>
+        </Bookmarks>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="..\intf_seralizeadapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="15"/>
-        <CursorPos Y="19"/>
-        <UsageCount Value="25"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="33"/>
+        <CursorPos X="14" Y="44"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -37,32 +40,35 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="42"/>
       </Unit3>
       <Unit4>
-        <Filename Value="..\xmlPersistent.pas"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="25"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="601"/>
+        <CursorPos Y="617"/>
+        <UsageCount Value="42"/>
+        <Bookmarks Count="1">
+          <Item0 X="21" Y="169" ID="2"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="testfpc_seralizeadapter_test.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="28"/>
-        <CursorPos Y="44"/>
-        <UsageCount Value="25"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="75"/>
+        <CursorPos X="11" Y="87"/>
+        <UsageCount Value="42"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="testcase1.pas"/>
         <UnitName Value="TestCase1"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="18"/>
       </Unit6>
       <Unit7>
         <Filename Value="C:\lazarus\components\fpcunit\guitestrunner.pas"/>
@@ -73,15 +79,15 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="25"/>
         <CursorPos X="32" Y="39"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit7>
       <Unit8>
         <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
         <UnitName Value="Laz2_DOM"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="361"/>
-        <CursorPos X="11" Y="372"/>
-        <UsageCount Value="12"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="269"/>
+        <CursorPos X="25" Y="286"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
@@ -89,173 +95,274 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="182"/>
         <CursorPos X="23" Y="193"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\lazarus\components\lazutils\laz_xmlwrite.pas"/>
         <UnitName Value="Laz_XMLWrite"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="13"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="10"/>
         <CursorPos X="3" Y="50"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="16"/>
       </Unit10>
       <Unit11>
         <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
         <UnitName Value="laz2_XMLWrite"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="349"/>
         <CursorPos X="17" Y="798"/>
+        <UsageCount Value="16"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\packages\rtl-objpas\src\inc\variants.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2995"/>
+        <CursorPos X="3" Y="2998"/>
+        <UsageCount Value="13"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\rtl\inc\varianth.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="109"/>
+        <CursorPos X="31" Y="123"/>
+        <UsageCount Value="13"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="79"/>
+        <CursorPos Y="94"/>
+        <UsageCount Value="33"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\packages\fcl-base\src\base64.pp"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="31"/>
+        <CursorPos X="14" Y="34"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
-      </Unit11>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="901"/>
+        <CursorPos X="3" Y="912"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\rtl\objpas\classes\cregist.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="111"/>
+        <CursorPos X="10" Y="122"/>
+        <UsageCount Value="11"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="C:\lazarus\components\lazutils\laz_xmlread.pas"/>
+        <UnitName Value="Laz_XMLRead"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="5"/>
+        <CursorPos X="11" Y="16"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlread.pas"/>
+        <UnitName Value="laz2_XMLRead"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1698"/>
+        <CursorPos X="30" Y="1700"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="frm_test.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmTest"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="frm_Test"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="4"/>
+        <CursorPos X="11" Y="16"/>
+        <UsageCount Value="29"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\rtl\objpas\typinfo.pp"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="31"/>
+        <CursorPos X="46" Y="47"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit21>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="915" Column="3" TopLine="898"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="617" TopLine="600"/>
       </Position1>
       <Position2>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="891" Column="11" TopLine="880"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="618" TopLine="600"/>
       </Position2>
       <Position3>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="446" Column="3" TopLine="438"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="619" TopLine="603"/>
       </Position3>
       <Position4>
-        <Filename Value="C:\lazarus\components\lazutils\laz_xmlwrite.pas"/>
-        <Caret Line="50" Column="3" TopLine="31"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="698" TopLine="686"/>
       </Position4>
       <Position5>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="910" Column="3" TopLine="898"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="619" TopLine="608"/>
       </Position5>
       <Position6>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="884" Column="23" TopLine="868"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="613" Column="25" TopLine="598"/>
       </Position6>
       <Position7>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="879" Column="24" TopLine="868"/>
+        <Filename Value="C:\lazarus\fpc\3.0.2\source\packages\fcl-base\src\base64.pp"/>
+        <Caret Line="33" Column="3" TopLine="22"/>
       </Position7>
       <Position8>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="543" Column="3" TopLine="535"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="614" Column="45" TopLine="601"/>
       </Position8>
       <Position9>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="477" Column="3" TopLine="466"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="616" TopLine="607"/>
       </Position9>
       <Position10>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="318" Column="3" TopLine="316"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="617" TopLine="607"/>
       </Position10>
       <Position11>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="9" Column="28"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="616" Column="5" TopLine="607"/>
       </Position11>
       <Position12>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="271" Column="30" TopLine="258"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="617" TopLine="607"/>
       </Position12>
       <Position13>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="93" Column="19" TopLine="81"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="614" Column="24" TopLine="607"/>
       </Position13>
       <Position14>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="241" Column="46" TopLine="219"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="617" Column="8" TopLine="607"/>
       </Position14>
       <Position15>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="271" Column="42" TopLine="253"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="616" Column="27" TopLine="605"/>
       </Position15>
       <Position16>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_dom.pas"/>
-        <Caret Line="385" Column="21" TopLine="378"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="189" Column="3" TopLine="178"/>
       </Position16>
       <Position17>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="44" Column="51" TopLine="28"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="616" Column="26" TopLine="606"/>
       </Position17>
       <Position18>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="45" Column="22" TopLine="28"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="612" Column="38" TopLine="606"/>
       </Position18>
       <Position19>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="44" Column="32" TopLine="33"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="618" Column="26" TopLine="606"/>
       </Position19>
       <Position20>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="38" Column="23" TopLine="33"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="625" TopLine="607"/>
       </Position20>
       <Position21>
-        <Filename Value="C:\lazarus\components\lazutils\laz_xmlwrite.pas"/>
-        <Caret Line="50" Column="3" TopLine="13"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="626" TopLine="608"/>
       </Position21>
       <Position22>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="871" Column="3" TopLine="866"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="89" TopLine="79"/>
       </Position22>
       <Position23>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="894" Column="3" TopLine="891"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="324" TopLine="312"/>
       </Position23>
       <Position24>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="446" Column="3" TopLine="639"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="325" TopLine="312"/>
       </Position24>
       <Position25>
-        <Filename Value="C:\lazarus\components\lazutils\laz2_xmlwrite.pas"/>
-        <Caret Line="448" Column="14" TopLine="437"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="326" TopLine="312"/>
       </Position25>
       <Position26>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="18" Column="37"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="327" TopLine="312"/>
       </Position26>
       <Position27>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="76" Column="30" TopLine="57"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="328" TopLine="312"/>
       </Position27>
       <Position28>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="20" Column="18"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="329" TopLine="312"/>
       </Position28>
       <Position29>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="55" Column="6"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="91" TopLine="79"/>
       </Position29>
       <Position30>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
-        <Caret Line="45" TopLine="28"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Caret Line="680" Column="3" TopLine="677"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="3">
+    <BreakPoints Count="6">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="testfpc_seralizeadapter_test.pas"/>
-        <Line Value="74"/>
+        <Line Value="94"/>
       </Item1>
       <Item2>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="testfpc_seralizeadapter_test.pas"/>
-        <Line Value="45"/>
+        <Line Value="63"/>
       </Item2>
       <Item3>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="testfpc_seralizeadapter_test.pas"/>
-        <Line Value="44"/>
+        <Line Value="72"/>
       </Item3>
+      <Item4>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="test_pascalobjectseralize.pas"/>
+        <Line Value="89"/>
+      </Item4>
+      <Item5>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\pascalobject_seralize.pas"/>
+        <Line Value="619"/>
+      </Item5>
+      <Item6>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\pascalobject_seralize.pas"/>
+        <Line Value="618"/>
+      </Item6>
     </BreakPoints>
   </Debugging>
 </CONFIG>
