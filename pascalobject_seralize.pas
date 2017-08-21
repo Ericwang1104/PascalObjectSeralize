@@ -142,8 +142,20 @@ begin
 end;
 
 procedure Base64StringToStream(Stream: TStream; base64Str: string);
+var
+  B64:TBase64DecodingStream;
+  str:TStringStream;
 begin
   //
+  str :=TstringStream.Create(Base64Str);
+  B64 :=TBase64DecodingStream.Create(str);
+  try
+
+    Stream.CopyFrom(B64,B64.Size);
+  finally
+    FreeAndNil(Str);
+    FreeAndNil(B64);
+  end;
 end;
 
 
@@ -418,9 +430,7 @@ var
   PropNode: IDataNode;
   Obj: TObject;
 begin
-
-
-  ReadPersistent(Instance, Node);
+ // ReadPersistent(Instance, Node);
   intPropCount := GetTypeData(Instance.ClassInfo)^.PropCount;
   GetMem(PList, intPropCount * SizeOf(Pointer));
   try
@@ -433,8 +443,7 @@ begin
         SetXMLPropValue(Instance, Node.Attributes[string(PProp^.Name)], PProp);
       end;
     end;
-
-    for intI := 0 to GetPropList(Instance.ClassInfo, tkObj, PList, False) - 1 do
+    for intI := 0 to GetPropList(Instance, PList) - 1 do
     begin
       PProp := PList^[intI];
       if PProp^.PropType^.Kind = tkClass then
@@ -462,12 +471,26 @@ begin
 end;
 
 procedure TObjectReader.ReadPersistent(Obj: TPersistent; Node: IDataNode);
+var
+  Comp,CompChild:TComponent;
+  I:integer;
+  ChildNode:IDataNode;
 begin
   if Obj is TCollection then
   begin
     ReadCollection((Obj as TCollection), Node);
     exit;
-  end ;
+  end  else
+  if Obj is TComponent then
+  begin
+    comp :=obj as TComponent;
+    for I := 0 to comp.ComponentCount-1 do
+    begin
+      Compchild :=comp.Components[I];
+      ChildNode :=Node.ChildByName(compchild.Name);
+      ReadPersistentFromXML(ChildNode,compChild);
+    end;
+  end;
 
 end;
 
@@ -562,18 +585,14 @@ end;
 procedure TMyCustomReader.ReadPicture(const Pic: TPicture;
   const Node: IDataNode);
 var
-  str: TStringStream;
-  Base64:TBase64DecodingStream;
+  Mem: TMemorystream;
 begin
-  str := TStringStream.Create(Node.Value);
-  Base64:=TBase64DecodingStream.Create(str);
+  Mem := TmemoryStream.Create();
   try
-    str.Position := 0;
-    base64.Position:=0;
-    Pic.Bitmap.LoadFromStream(Base64);
+    Base64StringToStream(MEM,Node.Attributes['DATA']);
+    Pic.Bitmap.LoadFromStream(MEM);
   finally
-    FreeAndNil(str);
-    FreeAndNil(Base64);
+    FreeAndNil(Mem);
   end;
 end;
 

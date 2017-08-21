@@ -18,6 +18,7 @@ type
     ActionList1: TActionList;
     Button1: TButton;
     Image1: TImage;
+    procedure actTestExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { private declarations }
@@ -35,6 +36,11 @@ implementation
 { TfrmTest }
 
 procedure TfrmTest.FormCreate(Sender: TObject);
+begin
+
+end;
+
+procedure TfrmTest.actTestExecute(Sender: TObject);
 begin
 
 end;
