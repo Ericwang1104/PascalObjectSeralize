@@ -16,8 +16,9 @@
       <Unit1>
         <Filename Value="..\fpc_seralizeadapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="157"/>
-        <CursorPos X="35" Y="164"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="84"/>
+        <CursorPos X="28" Y="93"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -42,10 +43,9 @@
       <Unit4>
         <Filename Value="..\pascalobject_seralize.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="576"/>
-        <CursorPos X="21" Y="594"/>
+        <TopLine Value="579"/>
+        <CursorPos X="33" Y="593"/>
         <UsageCount Value="53"/>
         <Bookmarks Count="3">
           <Item0 X="15" Y="237" ID="3"/>
@@ -80,7 +80,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frm_Test"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="14" Y="17"/>
+        <CursorPos X="34" Y="9"/>
         <UsageCount Value="40"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -227,7 +227,7 @@
         <Loaded Value="True"/>
       </Unit25>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="..\intf_seralizeadapter.pas"/>
         <Caret Line="33" Column="14" TopLine="22"/>
@@ -344,6 +344,10 @@
         <Filename Value="..\pascalobject_seralize.pas"/>
         <Caret Line="575" Column="8" TopLine="565"/>
       </Position29>
+      <Position30>
+        <Filename Value="..\fpc_seralizeadapter.pas"/>
+        <Caret Line="164" Column="35" TopLine="157"/>
+      </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>

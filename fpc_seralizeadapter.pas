@@ -90,13 +90,7 @@ end;
 
 function TFPCXmlNode.GetValue: variant;
 begin
-  if not Assigned(FNode) then exit;
- {$IFOPT D+}
-    SendDebug(FNode.NodeName);
-   SendDebug(FNode.NodeValue);
- {$ENDIF}
   result :=fNode.NodeValue;
-
 end;
 
 procedure TFPCXmlNode.SetAttributes(Name: string; AValue: string);
