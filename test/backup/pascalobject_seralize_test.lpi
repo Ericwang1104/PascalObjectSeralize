@@ -99,6 +99,7 @@
         <Filename Value="frm_test.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTest"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frm_Test"/>
       </Unit7>

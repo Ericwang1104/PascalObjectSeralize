@@ -3,9 +3,11 @@ object frmTest: TfrmTest
   Height = 373
   Top = 137
   Width = 427
-  Caption = 'testForm'
+  AllowDropFiles = True
+  Caption = 'Action1'
   ClientHeight = 373
   ClientWidth = 427
+  OnCreate = FormCreate
   LCLVersion = '1.6.4.0'
   object Image1: TImage
     Left = 16
@@ -387,5 +389,20 @@ object frmTest: TfrmTest
       8F4AF93432FE944EE9944EE9944EE9944EE9944EE9944EE9944EE9944EE994FE
       8ED1FF072521D232FCA3460C0000000049454E44AE426082
     }
+  end
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 232
+    Width = 75
+    Action = actTest
+    TabOrder = 0
+  end
+  object ActionList1: TActionList
+    left = 335
+    top = 233
+    object actTest: TAction
+      Caption = 'Action1'
+    end
   end
 end

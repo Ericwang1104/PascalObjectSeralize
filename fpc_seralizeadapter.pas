@@ -5,8 +5,8 @@ unit fpc_seralizeadapter;
 interface
 
 uses
-  Classes, SysUtils, intf_seralizeadapter, variants, Laz_XMLRead, Laz2_DOM,
-  Laz_XMLWrite;
+  Classes, SysUtils, intf_seralizeadapter, dbugintf, variants, Laz_XMLRead,
+  Laz2_DOM, Laz_XMLWrite;
 type
 
   { TFPCXmlNode }
@@ -84,7 +84,7 @@ end;
 
 function TFPCXmlNode.GetNodeName: string;
 begin
-  result :=fNode.NodeValue;
+  result :=fNode.NodeName;
 end;
 
 function TFPCXmlNode.GetValue: variant;

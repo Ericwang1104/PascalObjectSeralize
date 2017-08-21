@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, typinfo, pascalobject_seralize, intf_seralizeadapter,
-  fpc_seralizeadapter, dbugintf, dbugmsg, frm_Test, fpcunit, testutils,
+  fpc_seralizeadapter, base64, dbugintf, dbugmsg, frm_Test, fpcunit, testutils,
   testregistry;
 
 type
@@ -22,13 +22,17 @@ type
     procedure TestGetPropInfo;
   end;
 
+  { TestSearalizeObject }
+
   TestSearalizeObject= class(TTestCase)
   protected
     FW:TMyCustomWriter;
+    FR:TMyCustomReader;
     procedure SetUp; override;
     procedure TearDown; override;
   published
-    procedure TestHookUp;
+    procedure TestrfrmTest;
+    procedure TestwfrmTest;
   end;
 
 implementation
@@ -76,7 +80,7 @@ begin
 
 end;
 
-procedure TestSearalizeObject.TestHookUp;
+procedure TestSearalizeObject.TestwfrmTest;
 var
   Iadp:IDataAdapter;
   frm:TfrmTest;
@@ -96,12 +100,37 @@ end;
 procedure TestSearalizeObject.SetUp;
 begin
   FW :=TMyCustomWriter.Create(nil);
+  Fr :=TMyCustomReader.Create(nil);
 end;
 
 procedure TestSearalizeObject.TearDown;
 begin
+  FreeAndnil(Fr);
   FreeAndNil(FW);
 end;
+
+procedure TestSearalizeObject.TestrfrmTest;
+var
+  Iadp:IDataAdapter;
+  frm:TfrmTest;
+begin
+  iadp :=TFPCXmlAdapter.Create;
+  frm :=TfrmTest.Create(nil);
+  try
+
+    fr.Adapter :=Iadp;
+    fr.ReadFileToObject('e:\test.xml',frm) ;
+    frm.ShowModal;
+  finally
+    FreeAndnil(frm);
+  end;
+
+
+end;
+
+
+
+
 
 initialization
   RegisterTest(TestPascalSeralize);

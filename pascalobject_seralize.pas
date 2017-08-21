@@ -2,7 +2,8 @@ unit pascalobject_seralize;
 
 interface
 
-uses  TypInfo, Graphics, Variants, SysUtils, base64,intf_SeralizeadApter, Classes;
+uses  TypInfo, Graphics, Variants, SysUtils, base64, intf_SeralizeadApter,
+  dbugintf, Classes;
 
 const
   ROOT_OBJECT = 'XMLPersistent';
@@ -68,6 +69,8 @@ type
   published
   end;
 
+  { TObjectReader }
+
   TObjectReader = class(TObjectFilter)
   private
     function PropIsReadOnly(Pinfo: PPropInfo): boolean;
@@ -83,6 +86,7 @@ type
     function ReadValueFromXML(Node: IDataNode): Variant;
   public
     procedure ReadNodeToObject(const Node: IDataNode; Obj: TPersistent);
+    procedure ReadFileToObject(const FileName:string;Obj:TPersistent);
   published
   end;
 
@@ -97,10 +101,12 @@ type
   published
   end;
 
+  { TMyCustomWriter }
+
   TMyCustomWriter = class(TObjectWriter)
   private
     procedure SaveGraphic(Obj: TGraphic; Node: IDataNode);
-    procedure SaveStream(Stream: TStream; Node: IDataNode);
+    procedure SaveStream(const Stream: TStream; Node: IDataNode);
     procedure SaveTStrins(const Obj: TStrings; const Node: IDataNode);
   protected
     procedure WriteObject(Prop: PPropInfo; Node: IDataNode;
@@ -114,9 +120,31 @@ type
 
   end;
 
-
-
+function StreamToBase64String(const stream:TStream):string;
+procedure Base64StringToStream(Stream:TStream;base64Str:string);
 implementation
+
+function StreamToBase64String(const stream: TStream): string;
+var
+  B64:TBase64EncodingStream;
+  str:TStringStream;
+begin
+  str :=TStringStream.Create('');
+  B64:=TBase64EncodingStream.Create(str);
+  try
+    Stream.Position:=0;
+    B64.CopyFrom(stream,stream.Size);
+    result :=str.DataString;
+  finally
+    FreeAndNil(B64);
+    FreeAndNil(Str);
+  end;
+end;
+
+procedure Base64StringToStream(Stream: TStream; base64Str: string);
+begin
+  //
+end;
 
 
 
@@ -190,8 +218,6 @@ var
   ObjNOde: IDataNode;
   cClassName:string;
 begin
-
-
   case Prop^.PropType^.Kind of
     tkClass:
       begin
@@ -199,13 +225,14 @@ begin
         if PropObj is TPersistent then
         begin
           ObjNOde := Node.AddChild(string(Prop^.Name));
-
-          WriteXMLData(TPersistent(PropObj), ObjNOde);
+          if Assigned(PropObj) then
+            WriteXMLData(TPersistent(PropObj), ObjNOde);
         end
         else
         begin
           ObjNOde := Node.AddChild(string(Prop^.Name));
-          WriteObject(Prop, ObjNOde, PropObj);
+          if Assigned(PropObj) then
+            WriteObject(Prop, ObjNOde, PropObj);
         end;
       end;
     tkInterface:
@@ -350,6 +377,7 @@ begin
     begin
       PPInfo := PList^[intI];
       WriteProperties(Obj, PPInfo, Nde);
+
     end;
   finally
     FreeMem(PList, intPropCount * SizeOf(Pointer));
@@ -467,6 +495,13 @@ begin
   ReadPersistentFromXML(Node, Obj);
 end;
 
+procedure TObjectReader.ReadFileToObject(const FileName: string;
+  Obj: TPersistent);
+begin
+  FIAdp.LoadFromFile(FileName);
+ self.ReadNodeToObject(Fiadp.RootNode,Obj);
+end;
+
 procedure TObjectReader.SetXMLPropValue(Obj: TPersistent; Value: Variant;
   PProp: PPropInfo);
 begin
@@ -570,85 +605,42 @@ end;
 
 procedure TMyCustomWriter.SaveGraphic(Obj: TGraphic; Node: IDataNode);
 var
-  Stream: TMemoryStream;
-  str: TStringStream;
-  bs64:TBase64EncodingStream;
-
+  Mem: TMemoryStream;
 begin
   obj.ClassName;
   if Obj.Empty then
     exit;
-  Stream := TMemoryStream.Create;
-  str := TStringStream.Create('');
+  Mem := TMemoryStream.Create;
   try
-    str.Position := 0;
-    Obj.SaveToStream(Stream);
-    Stream.Position := 0;
-    bs64:=TBase64EncodingStream.Create(stream);
-    try
-      bs64.Position:= 0;
-      str.CopyFrom(bs64,bs64.Size);
-      Node.Value := str.DataString;
-    finally
-      FreeAndNil(bs64);
-    end;
+    Obj.SaveToStream(Mem);
+    Node.Attributes['DATA'] := StreamToBase64String(Mem);
   finally
-    FreeAndNil(str);
-    FreeAndNil(Stream);
+    FreeAndNil(Mem);
   end;
 end;
 
 procedure TMyCustomWriter.SavePicture(Pic: TPicture; Node: IDataNode);
 var
   Mem: TMemoryStream;
-  str: TStringStream;
-  bs64:TBase64EncodingStream;
-  n:string;
 begin
   Mem := TMemoryStream.Create();
-  str := TStringStream.Create('');
   try
     if Assigned(Pic) then
     begin
-      Pic.Bitmap.SaveToStream(Mem);
-      Mem.Position := 0;
-      bs64:=TBase64EncodingStream.Create(str);
-      try
-        Bs64.CopyFrom(Mem,mem.Size);
-        n :=Node.NodeName;
-        Node.Value := str.DataString;
-      finally
-        FreeAndNil(BS64);
-      end;
-
+      pic.SaveToStream(Mem);
+      Node.Attributes['DATA'] := StreamToBase64String(Mem);
     end;
   finally
-    FreeAndNil(str);
     FreeAndNil(Mem);
   end;
 end;
 
-procedure TMyCustomWriter.SaveStream(Stream: TStream; Node: IDataNode);
-var
-  str: TStringStream;
-  bs64:TBase64EncodingStream;
-begin
-  str := TStringStream.Create('');
-  try
-    str.Position := 0;
-    Stream.Position := 0;
-    bs64 :=TBase64EncodingStream.Create(stream);
-    try
-      bs64.Position:=0;
-      str.CopyFrom(bs64,bs64.Size);
-      Node.Value := str.DataString;
+procedure TMyCustomWriter.SaveStream(const Stream: TStream; Node: IDataNode);
 
-    finally
-      FreeAndnil(Bs64);
-    end;
-  finally
-    FreeAndNil(str);
-  end;
+begin
+  Node.Attributes['DATA'] := StreamToBase64String(Stream);
+
+
 end;
 
 procedure TMyCustomWriter.SaveTStrins(const Obj: TStrings;

@@ -5,7 +5,8 @@ unit frm_Test;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  StdCtrls, ActnList;
 
 type
 
@@ -13,7 +14,11 @@ type
 
   TfrmTest = class(TForm)
   published
+    actTest: TAction;
+    ActionList1: TActionList;
+    Button1: TButton;
     Image1: TImage;
+    procedure FormCreate(Sender: TObject);
   private
     { private declarations }
   public
@@ -26,6 +31,13 @@ var
 implementation
 
 {$R *.lfm}
+
+{ TfrmTest }
+
+procedure TfrmTest.FormCreate(Sender: TObject);
+begin
+
+end;
 
 end.
 
