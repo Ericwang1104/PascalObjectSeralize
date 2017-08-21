@@ -23,6 +23,7 @@ type
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
     function ChildByName(const Name:string):IDataNode;
+    function AddData(Data:string):IDataNode;
   protected
     fDoc:TDOMDocument;
     fNode:TDOMNode;
@@ -89,7 +90,13 @@ end;
 
 function TFPCXmlNode.GetValue: variant;
 begin
+  if not Assigned(FNode) then exit;
+ {$IFOPT D+}
+    SendDebug(FNode.NodeName);
+   SendDebug(FNode.NodeValue);
+ {$ENDIF}
   result :=fNode.NodeValue;
+
 end;
 
 procedure TFPCXmlNode.SetAttributes(Name: string; AValue: string);
@@ -136,7 +143,7 @@ end;
 
 function TFPCXmlNode.ChildCount: integer;
 begin
-
+  result :=FNode.ChildNodes.Count;
 end;
 
 function TFPCXmlNode.ChildByName(const Name: string): IDataNode;
@@ -145,6 +152,17 @@ var
 begin
   Node :=FNode.FindNode(Name);
   result :=BuilDataNode(Node);
+end;
+
+function TFPCXmlNode.AddData(Data: string): IDataNode;
+var
+  xmlNode :TFPCXmlNode;
+  CData:TDOMCDataSection;
+begin
+  CData :=fDoc.CreateCDATASection(Data);
+  fNode.AppendChild(CData);
+  result :=self.BuilDataNode(CData);
+
 end;
 
 { TFPCXmlAdapter }

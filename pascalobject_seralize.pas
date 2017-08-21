@@ -145,12 +145,12 @@ procedure Base64StringToStream(Stream: TStream; base64Str: string);
 var
   B64:TBase64DecodingStream;
   str:TStringStream;
+
 begin
   //
   str :=TstringStream.Create(Base64Str);
   B64 :=TBase64DecodingStream.Create(str);
   try
-
     Stream.CopyFrom(B64,B64.Size);
   finally
     FreeAndNil(Str);
@@ -430,7 +430,7 @@ var
   PropNode: IDataNode;
   Obj: TObject;
 begin
- // ReadPersistent(Instance, Node);
+  ReadPersistent(Instance, Node);
   intPropCount := GetTypeData(Instance.ClassInfo)^.PropCount;
   GetMem(PList, intPropCount * SizeOf(Pointer));
   try
@@ -443,7 +443,7 @@ begin
         SetXMLPropValue(Instance, Node.Attributes[string(PProp^.Name)], PProp);
       end;
     end;
-    for intI := 0 to GetPropList(Instance, PList) - 1 do
+    for intI := 0 to GetPropList(Instance.ClassInfo, tkObj, PList, False) - 1 do
     begin
       PProp := PList^[intI];
       if PProp^.PropType^.Kind = tkClass then
@@ -589,7 +589,9 @@ var
 begin
   Mem := TmemoryStream.Create();
   try
-    Base64StringToStream(MEM,Node.Attributes['DATA']);
+    //第0项用于保存 数据data
+    Base64StringToStream(MEM,Node.childItem[0].Value);
+    MEm.Position:=0;
     Pic.Bitmap.LoadFromStream(MEM);
   finally
     FreeAndNil(Mem);
@@ -646,8 +648,8 @@ begin
   try
     if Assigned(Pic) then
     begin
-      pic.SaveToStream(Mem);
-      Node.Attributes['DATA'] := StreamToBase64String(Mem);
+      pic.Bitmap.SaveToStream(Mem);
+      Node.AddData(StreamToBase64String(Mem));
     end;
   finally
     FreeAndNil(Mem);

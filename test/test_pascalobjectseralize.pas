@@ -34,8 +34,13 @@ type
     procedure TestrfrmTest;
     procedure TestwfrmTest;
   end;
-
+function SampleDataPath:string;
 implementation
+
+function SampleDataPath: string;
+begin
+  result :=GetCurrentDir+'\testData\';
+end;
 
 { TestPascalSeralize }
 
@@ -68,8 +73,12 @@ begin
   for I := 0 to intPropCount-1 do
   begin
     PInfo :=PList^[I];
+
     {$IFOPT D+}
-       SendDebug('PropName:'+Pinfo^.Name);
+    //Please run C:\lazarus\tools\debugserver\debugserver.exe
+
+      SendInteger('Prop Index:',Pinfo^.PropProcs);
+      SendDebug('PropName:'+Pinfo^.Name);
     {$ENDIF}
   end;
   SendSeparator;
@@ -89,8 +98,9 @@ begin
   frm :=TfrmTest.Create(nil);
   try
   fW.Adapter :=Iadp;
+  frm.Image1.Picture.LoadFromFile(SampleDataPath+'test.png');
   frm.ShowModal;
-  fw.WriteObjectToFile('e:\test.xml',frm);
+  fw.WriteObjectToFile(SampleDataPath+'test.xml',frm);
   finally
     FreeAndnil(frm);
   end;
@@ -117,9 +127,8 @@ begin
   iadp :=TFPCXmlAdapter.Create;
   frm :=TfrmTest.Create(nil);
   try
-
     fr.Adapter :=Iadp;
-    fr.ReadFileToObject('e:\test.xml',frm) ;
+    fr.ReadFileToObject(SampleDataPath+'test.xml',frm) ;
     frm.ShowModal;
   finally
     FreeAndnil(frm);

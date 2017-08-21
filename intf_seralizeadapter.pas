@@ -26,6 +26,7 @@ type
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
     function ChildByName(const Name:string):IDataNode;
+    function AddData(Data:string):IDataNode;
 
     Property ChildItem[Index:integer]:IDataNode read GetChildItem;
     property NodeName:string read GetNodeName write SetNodeName;
