@@ -55,7 +55,7 @@ type
       Node: IDataNode);
     procedure SetClassType(const Obj: TPersistent; Nde: IDataNode);
     procedure SetPersistentType(const Obj: TPersistent; const Node: IDataNode);
-    procedure WriteXMLData(const Obj: TPersistent; const Nde: IDataNode);
+    procedure WriteNodeData(const Obj: TPersistent; const Nde: IDataNode);
   strict protected
     procedure SavelCollectionItem(const Obj: TPersistent; const Node: IDataNode);
   protected
@@ -82,8 +82,8 @@ type
     procedure ReadObject(Obj: TObject; const PropNode: IDataNode);
       virtual; abstract;
     procedure ReadPersistent(Obj: TPersistent; Node: IDataNode); virtual;
-    procedure ReadPersistentFromXML(Node: IDataNode; Instance: TPersistent); virtual;
-    function ReadValueFromXML(Node: IDataNode): Variant;
+    procedure ReadPersistentFromNode(Node: IDataNode; Instance: TPersistent); virtual;
+    function ReadValueFromNode(Node: IDataNode): Variant;
   public
     procedure ReadNodeToObject(const Node: IDataNode; Obj: TPersistent);
     procedure ReadFileToObject(const FileName:string;Obj:TPersistent);
@@ -216,7 +216,7 @@ begin
     begin
       CompChild :=comp.Components[I];
       Child :=Node.AddChild(CompChild.Name);
-      WriteXMLData(CompChild,Child);
+      WriteNodeData(CompChild,Child);
 
     end;
   end;
@@ -238,7 +238,7 @@ begin
         begin
           ObjNOde := Node.AddChild(string(Prop^.Name));
           if Assigned(PropObj) then
-            WriteXMLData(TPersistent(PropObj), ObjNOde);
+            WriteNodeData(TPersistent(PropObj), ObjNOde);
         end
         else
         begin
@@ -302,7 +302,7 @@ begin
     begin
       PropObj := (Obj as TCollection).Items[intI];
       Child := Node.AddChild('Item');
-      WriteXMLData((PropObj as TPersistent), Child);
+      WriteNodeData((PropObj as TPersistent), Child);
     end;
   end;
 end;
@@ -363,11 +363,11 @@ var
 begin
   fiadp.NewDoc;
   Node :=fiadp.RootNode;
-  WriteXMLData(Obj,Node);
+  WriteNodeData(Obj,Node);
   FIAdp.SaveToFile(FileName);
 end;
 
-procedure TObjectWriter.WriteXMLData(const Obj: TPersistent;
+procedure TObjectWriter.WriteNodeData(const Obj: TPersistent;
   const Nde: IDataNode);
 var
   intI: Integer;
@@ -415,12 +415,12 @@ begin
       Child := Node.ChildItem[intI];
       FItem := TDynamicBuilder.BuildCollectionItem
         (Child.Attributes['ClassType'], Collection);
-      ReadPersistentFromXML(Child, FItem);
+      ReadPersistentFromNode(Child, FItem);
     end;
   end;
 end;
 
-procedure TObjectReader.ReadPersistentFromXML(Node: IDataNode; Instance:
+procedure TObjectReader.ReadPersistentFromNode(Node: IDataNode; Instance:
     TPersistent);
 var
   intI: Integer;
@@ -488,13 +488,13 @@ begin
     begin
       Compchild :=comp.Components[I];
       ChildNode :=Node.ChildByName(compchild.Name);
-      ReadPersistentFromXML(ChildNode,compChild);
+      ReadPersistentFromNode(ChildNode,compChild);
     end;
   end;
 
 end;
 
-function TObjectReader.ReadValueFromXML(Node: IDataNode): Variant;
+function TObjectReader.ReadValueFromNode(Node: IDataNode): Variant;
 begin
   result := Node.Value;
 end;
@@ -504,7 +504,7 @@ procedure TObjectReader.ReadXMLObject(Obj: TPersistent; Node: IDataNode;
 begin
   if Obj is TPersistent then
   begin
-    ReadPersistentFromXML(Node, Obj);
+    ReadPersistentFromNode(Node, Obj);
   end
   else
   begin
@@ -515,7 +515,7 @@ end;
 procedure TObjectReader.ReadNodeToObject(const Node: IDataNode;
   Obj: TPersistent);
 begin
-  ReadPersistentFromXML(Node, Obj);
+  ReadPersistentFromNode(Node, Obj);
 end;
 
 procedure TObjectReader.ReadFileToObject(const FileName: string;
