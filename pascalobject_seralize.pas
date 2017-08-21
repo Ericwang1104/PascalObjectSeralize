@@ -9,10 +9,10 @@ const
   ROOT_OBJECT = 'XMLPersistent';
 
  tkPersistent = [tkInteger, tkChar, tkEnumeration, tkSet, tkClass, tkInterface,
-    tkFloat, tkWChar, tkString, tkLString, tkWString, tkUString, tkVariant,
+    tkFloat, tkWChar, tkString, tkLString,tkAString, tkWString, tkUString, tkVariant,
     tkInt64, tkRecord, tkArray, tkDynArray, tkUnknown];
   tkObj = [tkClass, tkInterface];
-  tkStr = [tkString, tkLString, tkWString, tkUString];
+  tkStr = [tkString, tkLString, tkWString, tkUString,tkAString];
   tkValue = tkPersistent - tkObj;
   tkOthers = [tkMethod];
   tkAll = tkPersistent + tkOthers;
@@ -173,13 +173,13 @@ end;
 class function TDynamicBuilder.BuildCollectionItem(aClassName: string;
   Collection: TCollection): TCollectionItem;
 begin
-  result := TCollectionItemClass(FindClass(ClassName)).Create(Collection);
+  result := TCollectionItemClass(FindClass(aClassName)).Create(Collection);
 end;
 
 class function TDynamicBuilder.BuildComponent(const aClassName: string;
   const AOwner: TComponent): TComponent;
 begin
-  result := TComponentClass(FindClass(ClassName)).Create(AOwner);
+  result := TComponentClass(FindClass(aClassName)).Create(AOwner);
 end;
 
 class function TDynamicBuilder.BuildPersistent(aClassName: string): TPersistent;
@@ -271,7 +271,7 @@ begin
         Node.Attributes[string(Prop^.Name)] :=
           GetPropValue(Obj, string(Prop^.Name));
       end;
-    tkString, tkLString, tkWString, tkUString:
+    tkString, tkLString, tkWString, tkUString,tkAString:
       begin
         Node.Attributes[string(Prop^.Name)] :=
           GetPropValue(Obj, string(Prop^.Name));
@@ -545,6 +545,8 @@ begin
       tkWString:
         SetWideStrProp(Obj, string(PProp^.Name), Value);
       tkLString:
+        SetStrProp(Obj, string(PProp^.Name), Value);
+      tkAString:
         SetStrProp(Obj, string(PProp^.Name), Value);
     else
       begin
