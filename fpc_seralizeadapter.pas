@@ -5,8 +5,8 @@ unit fpc_seralizeadapter;
 interface
 
 uses
-  Classes, SysUtils, intf_seralizeadapter, dbugintf, variants, Laz_XMLRead,
-  Laz2_DOM, Laz_XMLWrite;
+  Classes, SysUtils, intf_seralizeadapter, fpjson, dbugintf, variants,
+  Laz_XMLRead, Laz2_DOM, Laz_XMLWrite;
 type
 
   { TFPCXmlNode }
@@ -29,9 +29,10 @@ type
     fNode:TDOMNode;
     function BuilDataNode(const Node:TDOMNode):IDataNode;
   end;
-  TFPCJsonNode=class(TInterfacedObject)
+  {TFPCJsonNode=class(TInterfacedObject,IDataNode)
 
-  end;
+  end;}
+
 
   { TFPCXmlAdapter }
 
@@ -50,11 +51,190 @@ type
     destructor Destroy;override;
 
   end;
-  TFPCJsonAdapter=class(TInterfacedObject)
-
+  TFPCJsonNode=class(TInterfacedObject,IDataNode)
+    function GetAttributes(Name: string): string;
+      function GetChildItem(Index:integer): IDataNode;
+      function GetNodeName: string;
+      function GetValue: variant;
+      procedure SetAttributes(Name: string; AValue: string);
+      procedure SetNodeName(AValue: string);
+      procedure SetValue(AValue: variant);
+      function AddChild(const Name:string):IDataNode;
+      function ChildCount:integer;
+      function ChildByName(const Name:string):IDataNode;
+      function AddData(Data:string):IDataNode;
+    protected
+      fDoc:TJsonObject;
+      fNode:TJSOnData;
+      function BuilDataNode(const Node:TJsonData):IDataNode;
   end;
 
+    { TFPCJsonAdapter }
+
+  TFPCJsonAdapter=class(TInterfacedObject,IDataAdapter)
+    function NewDoc:IDataNode;
+    function GetRootNode:IDataNode;
+    procedure  LoadFromFile(const Filename:string);
+    procedure SaveToFile(const FileName:string);
+
+  private
+    fDoc:TJsonObject;
+  public
+    destructor Destroy;override;
+  end;
 implementation
+
+{ TFPCJsonNode }
+
+function TFPCJsonNode.GetAttributes(Name: string): string;
+begin
+  if FNode is TJSonData then
+  begin
+    result :=(FNode as TJsonObject).Get(Name);
+  end else
+  begin
+    assert(false,'fnode is not a object');
+  end;
+end;
+
+function TFPCJsonNode.GetChildItem(Index: integer): IDataNode;
+var
+  data:TJsonData;
+begin
+  Data :=fNode.Items[Index];
+  result :=self.BuilDataNode(Data);
+end;
+
+function TFPCJsonNode.GetNodeName: string;
+begin
+  if fNode is TJsonobject then
+  begin
+    result :=(FNode as TJsonObject).Names[0];
+  end else
+  begin
+    result :='';
+  end;
+end;
+
+function TFPCJsonNode.GetValue: variant;
+begin
+  result :=FNode.Value;
+end;
+
+procedure TFPCJsonNode.SetAttributes(Name: string; AValue: string);
+var
+  JD:TJSOnData;
+begin
+  if FNode is TJsonObject then
+  begin
+    if (FNode as TJSonObject).Nulls[Name] then
+    begin
+      (FNode as TJsonObject).Add(Name,AValue);
+    end else
+    begin
+      JD :=(FNode as TJsonObject).Find(Name);
+      jd.AsString:=AValue;
+    end;
+  end;
+end;
+
+procedure TFPCJsonNode.SetNodeName(AValue: string);
+begin
+  //
+end;
+
+procedure TFPCJsonNode.SetValue(AValue: variant);
+
+begin
+  FNode.Value:=AValue;
+
+end;
+
+function TFPCJsonNode.AddChild(const Name: string): IDataNode;
+var
+  JObj:TJsonObject;
+  Child:TJsonObject;
+begin
+  Jobj :=FNode as TJSonObject;
+  Jobj.Add(Name,Child);
+  result :=BuilDataNode(Child);
+end;
+
+function TFPCJsonNode.ChildCount: integer;
+begin
+  result :=FNode.Count;
+end;
+
+function TFPCJsonNode.ChildByName(const Name: string): IDataNode;
+var
+  JD:TJSOnData;
+begin
+  JD :=(FNode as TJsonObject).Find(Name);
+  if Assigned(JD) then
+  begin
+    result :=BuilDataNode(JD);
+  end;
+end;
+
+function TFPCJsonNode.AddData(Data: string): IDataNode;
+begin
+  (FNode as TJSonObject).Add('CDATA',Data);
+end;
+
+function TFPCJsonNode.BuilDataNode(const Node: TJsonData): IDataNode;
+var
+  JNode:TFPCJsonNode;
+begin
+  JNode :=TFPCJsonNode.Create;
+  JNode.fDoc :=self.fDoc;
+  JNode.fNode :=Node;
+  result :=JNode;
+end;
+
+{ TFPCJsonAdapter }
+
+function TFPCJsonAdapter.NewDoc: IDataNode;
+begin
+ Fdoc :=GetJson('{JSONOBJECT{}}') as TJsonObject;
+end;
+
+function TFPCJsonAdapter.GetRootNode: IDataNode;
+var
+  JObj:TJsonObject;
+begin
+   FDoc.Get('JSONOBJECT',JObj);
+
+end;
+
+procedure TFPCJsonAdapter.LoadFromFile(const Filename: string);
+var
+  str:TStringStream;
+  FS:TFileStream;
+begin
+  str :=TStringStream.Create('');
+  FS :=TFileStream.Create(FileName,fmopenRead);
+  try
+    FS.Position:=0;
+    str.CopyFrom(FS,FS.Size);
+    if not Assigned(Fdoc) then FreeAndNil(FDoc);
+    Fdoc :=GetJson(str) as TJsonObject;
+  finally
+    FreeAndNil(FS);
+    FreeAndNil(str);
+  end;
+end;
+
+procedure TFPCJsonAdapter.SaveToFile(const FileName: string);
+begin
+
+end;
+
+destructor TFPCJsonAdapter.Destroy;
+begin
+  if Assigned(FDoc) then
+    FreeAndNil(FDoc);
+  inherited ;
+end;
 
 { TFPCXmlNode }
 

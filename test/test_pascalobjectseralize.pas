@@ -187,6 +187,7 @@ begin
   try
     fr.Adapter :=IAdp;
     fr.ReadFileToObject(SampleDataPath+'testcollection.xml',coll);
+    checkequals(Coll.datacollectionName,'TestDataName');
     Item :=Coll.DataItem[0];
 
     checkequals(item.testString,'hello world');

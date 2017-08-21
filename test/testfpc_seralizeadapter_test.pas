@@ -5,8 +5,9 @@ unit testfpc_seralizeadapter_test;
 interface
 
 uses
-  Classes, SysUtils, fpc_seralizeadapter,Forms, intf_seralizeadapter, Laz_XMLRead,
-  Laz2_DOM, laz2_XMLWrite, Laz_XMLWrite, fpcunit, testutils, testregistry;
+  Classes, SysUtils, fpc_seralizeadapter, Forms, intf_seralizeadapter, dbugintf,
+  fpjson, jsonparser, Laz_XMLRead, Laz2_DOM, laz2_XMLWrite, Laz_XMLWrite,
+  fpcunit, testutils, testregistry;
 
 type
 
@@ -24,9 +25,22 @@ type
     procedure TestAddAttribute;
   end;
 
+  { TJSonAccessTest }
+
+  TJSonAccessTest=class(TTestCase)
+  private
+
+  protected
+    procedure SetUp;override;
+    procedure TearDown; override;
+  published
+    procedure TestJsonAccess;
+  end;
+
   TFpcAdapterTest= class(TTestCase)
   private
     FXML:TFPCXmlAdapter;
+
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -35,6 +49,43 @@ type
   end;
 
 implementation
+
+{ TJSonAccessTest }
+
+procedure TJSonAccessTest.SetUp;
+begin
+  inherited ;
+end;
+
+procedure TJSonAccessTest.TearDown;
+begin
+  inherited ;
+end;
+
+procedure TJSonAccessTest.TestJsonAccess;
+var
+  JData,JItem:TJSONData;
+  JObj:TJsonObject;
+begin
+  JData :=getJson('{"JSONDATA":{}}');
+  Jobj :=JData as TJsonObject;
+  try
+     senddebug(Jobj.Names[1]);
+    Jobj :=(JData as TJsonObject).Items[0] as TJsonObject;
+    Jobj.Add('testnod1',35);
+    jobj.Add('testnod2',true);
+    senddebug(jobj.AsJSON);
+
+
+    checkequals(JObj.Items[0].AsString,'35');
+    checkequals(jobj.Items[1].AsString,'True');
+    senddebug(jobj.Items[1].AsString);
+
+  finally
+    FreeAndNil(JData);
+  end;
+
+end;
 
 { TXMLAccessTest }
 
@@ -105,6 +156,7 @@ begin
 end;
 
 initialization
+  RegisterTest(TJSonAccessTest);
   RegisterTest(TXMLAccessTest);
   RegisterTest(TFpcAdapterTest);
 end.

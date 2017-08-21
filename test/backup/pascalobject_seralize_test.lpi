@@ -66,7 +66,7 @@
         <PackageName Value="fpcunitide"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="7">
       <Unit0>
         <Filename Value="pascalobject_seralize_test.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -80,29 +80,25 @@
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="..\testxmlpersistent.pas"/>
+        <Filename Value="..\pascalobject_seralize.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="..\pascalobject_seralize.pas"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="test_pascalobjectseralize.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit6>
-      <Unit7>
         <Filename Value="frm_test.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmTest"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frm_Test"/>
-      </Unit7>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

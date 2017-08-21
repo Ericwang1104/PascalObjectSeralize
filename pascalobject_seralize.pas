@@ -601,19 +601,9 @@ begin
 end;
 
 procedure TMyCustomReader.ReadStream(Stream: TStream; Node: IDataNode);
-var
-  str: TStringStream;
-  b64Stream:TBase64DecodingStream;
+
 begin
-  str := TStringStream.Create(Node.Value);
-  b64Stream :=TBase64DecodingStream.Create(str);
-  try
-    str.Position := 0;
-    Stream.Position := 0;
-    stream.CopyFrom(b64Stream,b64Stream.Size);
-  finally
-    FreeAndNil(str);
-  end;
+  Base64StringToStream(Stream,Node.childItem[0].Value);
 end;
 
 procedure TMyCustomReader.ReadStrings(Obj: TStrings; Node: IDataNode);
@@ -636,7 +626,7 @@ begin
   Mem := TMemoryStream.Create;
   try
     Obj.SaveToStream(Mem);
-    Node.Attributes['DATA'] := StreamToBase64String(Mem);
+    Node.addData( StreamToBase64String(Mem));
   finally
     FreeAndNil(Mem);
   end;
@@ -661,9 +651,7 @@ end;
 procedure TMyCustomWriter.SaveStream(const Stream: TStream; Node: IDataNode);
 
 begin
-  Node.Attributes['DATA'] := StreamToBase64String(Stream);
-
-
+  Node.AddData(StreamToBase64String(Stream));
 end;
 
 procedure TMyCustomWriter.SaveTStrins(const Obj: TStrings;

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <XMLObject PersistentType="TCollection" ClassType="TDataCollection" datacollectionName="TestDataName">
-  <Item PersistentType="TCollectionItem" ClassType="TDataItem" testDate="42968.6172079167" testFloat="3.14" testInteger="28" testString="hello world"/>
+  <Item PersistentType="TCollectionItem" ClassType="TDataItem" testDate="42968.6218732986" testFloat="3.14" testInteger="28" testString="hello world"/>
 </XMLObject>
