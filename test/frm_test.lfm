@@ -1,7 +1,7 @@
 object frmTest: TfrmTest
-  Left = 389
+  Left = 754
   Height = 373
-  Top = 137
+  Top = 155
   Width = 427
   AllowDropFiles = True
   Caption = 'Action1'

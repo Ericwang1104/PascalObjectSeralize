@@ -64,6 +64,9 @@ type
     procedure TestWritefrmTest;
     procedure TestWriteCollection;
     procedure TEstReadCollection;
+
+    procedure TestWriteFrmTest_JsonAdapter;
+    procedure TestReadFrmTest_JsonAdapter;
   end;
 function SampleDataPath:string;
 implementation
@@ -198,6 +201,41 @@ begin
   finally
      FreeAndNil( Coll);
   end;
+
+end;
+
+procedure TestSearalizeObject.TestWriteFrmTest_JsonAdapter;
+var
+  Iadp:IDataAdapter;
+  frm:TfrmTest;
+begin
+  iadp :=TFPCJsonAdapter.Create;
+  frm :=TfrmTest.Create(nil);
+  try
+  fW.Adapter :=Iadp;
+  frm.Image1.Picture.LoadFromFile(SampleDataPath+'test.png');
+  frm.ShowModal;
+  fw.WriteObjectToFile(SampleDataPath+'test.json',frm);
+  finally
+    FreeAndnil(frm);
+  end;
+end;
+
+procedure TestSearalizeObject.TestReadFrmTest_JsonAdapter;
+var
+  Iadp:IDataAdapter;
+  frm:TfrmTest;
+begin
+  iadp :=TFPCJsonAdapter.Create;
+  frm :=TfrmTest.Create(nil);
+  try
+    fr.Adapter :=Iadp;
+    fr.ReadFileToObject(SampleDataPath+'test.json',frm) ;
+    frm.ShowModal;
+  finally
+    FreeAndnil(frm);
+  end;
+
 
 end;
 

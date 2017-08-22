@@ -23,7 +23,8 @@ type
     function AddChild(const Name:string):IDataNode;
     function ChildCount:integer;
     function ChildByName(const Name:string):IDataNode;
-    function AddData(Data:string):IDataNode;
+    procedure SetData(AValue: string);
+    function GetData: string;
   protected
     fDoc:TDOMDocument;
     fNode:TDOMNode;
@@ -62,7 +63,9 @@ type
       function AddChild(const Name:string):IDataNode;
       function ChildCount:integer;
       function ChildByName(const Name:string):IDataNode;
-      function AddData(Data:string):IDataNode;
+      procedure SetData(AValue: string);
+      function GetData: string;
+
     protected
       fDoc:TJsonObject;
       fNode:TJSOnData;
@@ -118,16 +121,19 @@ end;
 
 function TFPCJsonNode.GetValue: variant;
 begin
-  result :=FNode.Value;
+  result :=FNode.AsJSON;
 end;
 
 procedure TFPCJsonNode.SetAttributes(Name: string; AValue: string);
 var
   JD:TJSOnData;
+  Jobj:TJsonObject;
 begin
   if FNode is TJsonObject then
   begin
-    if (FNode as TJSonObject).Nulls[Name] then
+    JObj :=FNode as TJsonObject;
+    JD :=Jobj.Find(Name);
+    if not Assigned(JD)then
     begin
       (FNode as TJsonObject).Add(Name,AValue);
     end else
@@ -155,8 +161,9 @@ var
   JObj:TJsonObject;
   Child:TJsonObject;
 begin
-  Jobj :=FNode as TJSonObject;
-  Jobj.Add(Name,Child);
+  JObj :=FNode as TJsonObject;
+  Child :=TJsonObject.Create();
+  JObj.Add(Name,Child);
   result :=BuilDataNode(Child);
 end;
 
@@ -176,10 +183,17 @@ begin
   end;
 end;
 
-function TFPCJsonNode.AddData(Data: string): IDataNode;
+procedure TFPCJsonNode.SetData(AValue: string);
 begin
-  (FNode as TJSonObject).Add('CDATA',Data);
+ (FNode as TJSonObject).Add('CDATA',AValue);
 end;
+
+function TFPCJsonNode.GetData: string;
+begin
+  result :=(FNode as TJsonObject).Get('CDATA');
+end;
+
+
 
 function TFPCJsonNode.BuilDataNode(const Node: TJsonData): IDataNode;
 var
@@ -195,38 +209,47 @@ end;
 
 function TFPCJsonAdapter.NewDoc: IDataNode;
 begin
- Fdoc :=GetJson('{JSONOBJECT{}}') as TJsonObject;
+ Fdoc :=GetJson('{JSONOBJECT:{}}') as TJsonObject;
 end;
 
 function TFPCJsonAdapter.GetRootNode: IDataNode;
 var
+  Node:TFPCJsonNode;
   JObj:TJsonObject;
 begin
-   FDoc.Get('JSONOBJECT',JObj);
-
+  JObj :=FDoc.Find('JSONOBJECT') as TJsonObject;
+  Node :=TFPCJsonNode.Create;
+  Node.fNode :=JObj;
+  Node.fDoc :=fDOc;
+  result :=Node;
 end;
 
 procedure TFPCJsonAdapter.LoadFromFile(const Filename: string);
 var
-  str:TStringStream;
   FS:TFileStream;
 begin
-  str :=TStringStream.Create('');
   FS :=TFileStream.Create(FileName,fmopenRead);
   try
     FS.Position:=0;
-    str.CopyFrom(FS,FS.Size);
     if not Assigned(Fdoc) then FreeAndNil(FDoc);
-    Fdoc :=GetJson(str) as TJsonObject;
+    FDoc :=GetJson(FS) as TJsonObject;
   finally
     FreeAndNil(FS);
-    FreeAndNil(str);
   end;
 end;
 
 procedure TFPCJsonAdapter.SaveToFile(const FileName: string);
+var
+  FS:TFileStream;
 begin
+  FS :=TFileStream.Create(FileName,fmcreate);
+  try
+    FDoc.FormatJSON([foUseTabchar]);
+    Fdoc.DumpJSON(FS);
 
+  finally
+    FreeAndNil(FS);
+  end;
 end;
 
 destructor TFPCJsonAdapter.Destroy;
@@ -328,16 +351,23 @@ begin
   result :=BuilDataNode(Node);
 end;
 
-function TFPCXmlNode.AddData(Data: string): IDataNode;
+procedure TFPCXmlNode.SetData(AValue: string);
 var
   xmlNode :TFPCXmlNode;
   CData:TDOMCDataSection;
 begin
-  CData :=fDoc.CreateCDATASection(Data);
+  CData :=fDoc.CreateCDATASection(AVAlue);
   fNode.AppendChild(CData);
-  result :=self.BuilDataNode(CData);
+
 
 end;
+
+function TFPCXmlNode.GetData: string;
+begin
+  result :=FNode.FindNode('#cdata-section').NodeValue;
+end;
+
+
 
 { TFPCXmlAdapter }
 

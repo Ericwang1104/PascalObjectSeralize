@@ -588,11 +588,13 @@ procedure TMyCustomReader.ReadPicture(const Pic: TPicture;
   const Node: IDataNode);
 var
   Mem: TMemorystream;
+  str:string;
 begin
   Mem := TmemoryStream.Create();
   try
     //第0项用于保存 数据data
-    Base64StringToStream(MEM,Node.childItem[0].Value);
+    str :=Node.Value;
+    Base64StringToStream(MEM,Node.DATA);
     MEm.Position:=0;
     Pic.Bitmap.LoadFromStream(MEM);
   finally
@@ -626,7 +628,7 @@ begin
   Mem := TMemoryStream.Create;
   try
     Obj.SaveToStream(Mem);
-    Node.addData( StreamToBase64String(Mem));
+    Node.DATA :=StreamToBase64String(Mem);
   finally
     FreeAndNil(Mem);
   end;
@@ -641,7 +643,7 @@ begin
     if Assigned(Pic) then
     begin
       pic.Bitmap.SaveToStream(Mem);
-      Node.AddData(StreamToBase64String(Mem));
+      Node.DATA :=StreamToBase64String(Mem);
     end;
   finally
     FreeAndNil(Mem);
@@ -651,7 +653,7 @@ end;
 procedure TMyCustomWriter.SaveStream(const Stream: TStream; Node: IDataNode);
 
 begin
-  Node.AddData(StreamToBase64String(Stream));
+  Node.DATA :=StreamToBase64String(Stream);
 end;
 
 procedure TMyCustomWriter.SaveTStrins(const Obj: TStrings;
