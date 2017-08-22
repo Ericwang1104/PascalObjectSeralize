@@ -67,6 +67,8 @@ type
 
     procedure TestWriteFrmTest_JsonAdapter;
     procedure TestReadFrmTest_JsonAdapter;
+    procedure TestWriteCollection_Json;
+    procedure TEstReadCollection_Json;
   end;
 function SampleDataPath:string;
 implementation
@@ -236,6 +238,56 @@ begin
     FreeAndnil(frm);
   end;
 
+
+end;
+
+procedure TestSearalizeObject.TestWriteCollection_Json;
+var
+  coll:TDataCollection;
+  Item:TDataItem;
+  IAdp:IDataAdapter;
+begin
+  Coll :=TDatacollection.Create(TdataItem);
+  IAdp :=TFPCJsonAdapter.Create;
+  try
+    Coll.datacollectionName:='TestDataName';
+
+    Item :=coll.AddDataItem;
+    item.testDate:=now;
+    item.testFloat:=3.14;
+    item.testInteger:=28;
+    item.testString:='hello world';
+    fw.Adapter :=IAdp;
+    fw.WriteObjectToFile(SampleDataPath+'testCollection.Json',Coll);
+
+  finally
+    FreeAndNil( Coll);
+  end;
+
+end;
+
+procedure TestSearalizeObject.TEstReadCollection_Json;
+var
+  coll:TDataCollection;
+  Item:TDataItem;
+  IAdp:IDataAdapter;
+begin
+  Coll :=TDatacollection.Create(TdataItem);
+  IAdp :=TFPCJsonAdapter.Create;
+  try
+    fr.Adapter :=IAdp;
+    fr.ReadFileToObject(SampleDataPath+'testcollection.Json',coll);
+    checkequals(Coll.datacollectionName,'TestDataName');
+    Item :=Coll.DataItem[0];
+
+    checkequals(item.testString,'hello world');
+    checkequals(item.testInteger,28);
+    checkequals(item.testFloat,3.14);
+    checkequals(YearOf(item.testDate),yearOf(now));
+
+  finally
+     FreeAndNil( Coll);
+  end;
 
 end;
 

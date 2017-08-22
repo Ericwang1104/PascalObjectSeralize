@@ -69,6 +69,7 @@ type
     protected
       fDoc:TJsonObject;
       fNode:TJSOnData;
+      FParent:TJsonObject;
       function BuilDataNode(const Node:TJsonData):IDataNode;
   end;
 
@@ -109,19 +110,18 @@ begin
 end;
 
 function TFPCJsonNode.GetNodeName: string;
+var
+  Obj:TJsonObject;
+  Index:integer;
 begin
-  if fNode is TJsonobject then
-  begin
-    result :=(FNode as TJsonObject).Names[0];
-  end else
-  begin
-    result :='';
-  end;
+  Index :=FParent.IndexOf(FNode);
+  result :=FParent.Names[Index];
+
 end;
 
 function TFPCJsonNode.GetValue: variant;
 begin
-  result :=FNode.AsJSON;
+  result :=FNode.Value;
 end;
 
 procedure TFPCJsonNode.SetAttributes(Name: string; AValue: string);
@@ -146,7 +146,7 @@ end;
 
 procedure TFPCJsonNode.SetNodeName(AValue: string);
 begin
-  //
+
 end;
 
 procedure TFPCJsonNode.SetValue(AValue: variant);
@@ -160,6 +160,7 @@ function TFPCJsonNode.AddChild(const Name: string): IDataNode;
 var
   JObj:TJsonObject;
   Child:TJsonObject;
+  JNode:TFPCJsonNode;
 begin
   JObj :=FNode as TJsonObject;
   Child :=TJsonObject.Create();
@@ -195,6 +196,8 @@ end;
 
 
 
+
+
 function TFPCJsonNode.BuilDataNode(const Node: TJsonData): IDataNode;
 var
   JNode:TFPCJsonNode;
@@ -202,6 +205,7 @@ begin
   JNode :=TFPCJsonNode.Create;
   JNode.fDoc :=self.fDoc;
   JNode.fNode :=Node;
+  JNode.FParent :=FNode as TJsonObject;
   result :=JNode;
 end;
 
@@ -220,6 +224,7 @@ begin
   JObj :=FDoc.Find('JSONOBJECT') as TJsonObject;
   Node :=TFPCJsonNode.Create;
   Node.fNode :=JObj;
+  Node.FParent :=FDoc;
   Node.fDoc :=fDOc;
   result :=Node;
 end;
