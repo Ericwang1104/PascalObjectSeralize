@@ -26,6 +26,9 @@ uses
 {$R *.RES}
 
 begin
+  {$IFDEF DEBUG}
+    ReportMemoryLeaksOnShutdown :=true;
+  {$ENDIF}
   DUnitTestRunner.RunRegisteredTests;
 end.
 

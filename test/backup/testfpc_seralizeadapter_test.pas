@@ -70,7 +70,7 @@ begin
   JData :=getJson('{"JSONDATA":{}}');
   Jobj :=JData as TJsonObject;
   try
-     SendInteger('JSONDATA',Jobj.Count);
+     SendInteger(Jobj.Count);
     Jobj :=(JData as TJsonObject).Items[0] as TJsonObject;
     Jobj.Add('testnod1',35);
     jobj.Add('testnod2',true);

@@ -9,7 +9,7 @@
         <Filename Value="pascalobject_seralize_test.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos Y="16"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="91"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,8 +17,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="482"/>
-        <CursorPos X="3" Y="247"/>
-        <UsageCount Value="89"/>
+        <CursorPos Y="488"/>
+        <UsageCount Value="91"/>
         <Bookmarks Count="2">
           <Item0 X="22" Y="139" ID="1"/>
           <Item1 Y="177" ID="4"/>
@@ -28,20 +28,19 @@
       <Unit2>
         <Filename Value="..\intf_seralizeadapter.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="8"/>
         <CursorPos X="14" Y="20"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="91"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\pascalobject_seralize.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="5"/>
-        <TopLine Value="515"/>
-        <CursorPos X="24" Y="531"/>
-        <UsageCount Value="89"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="530"/>
+        <CursorPos X="25" Y="527"/>
+        <UsageCount Value="91"/>
         <Bookmarks Count="2">
           <Item0 X="8" Y="629" ID="2"/>
           <Item1 X="15" Y="277" ID="3"/>
@@ -51,18 +50,20 @@
       <Unit4>
         <Filename Value="testfpc_seralizeadapter_test.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="119"/>
-        <CursorPos X="3" Y="70"/>
-        <UsageCount Value="89"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="46"/>
+        <CursorPos X="65" Y="123"/>
+        <UsageCount Value="91"/>
+        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="test_pascalobjectseralize.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="267"/>
-        <CursorPos Y="279"/>
-        <UsageCount Value="80"/>
+        <TopLine Value="320"/>
+        <CursorPos X="59" Y="330"/>
+        <UsageCount Value="82"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -72,10 +73,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="frm_Test"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="7"/>
         <CursorPos X="32" Y="15"/>
-        <UsageCount Value="76"/>
+        <UsageCount Value="78"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit6>
@@ -245,7 +246,7 @@
       </Unit28>
       <Unit29>
         <Filename Value="C:\fpcupdeluxe\fpcsrc\packages\fcl-json\src\fpjson.pp"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="2433"/>
         <CursorPos X="3" Y="2435"/>
         <UsageCount Value="19"/>
@@ -291,7 +292,7 @@
       </Unit34>
       <Unit35>
         <Filename Value="..\JsonDataObjects.pas"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="13"/>
         <CursorPos X="23" Y="737"/>
         <UsageCount Value="16"/>
@@ -302,135 +303,135 @@
         <EditorIndex Value="2"/>
         <TopLine Value="272"/>
         <CursorPos X="50" Y="284"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit36>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="49" Column="15" TopLine="37"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Caret Line="82" TopLine="62"/>
       </Position1>
       <Position2>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="499" Column="3" TopLine="482"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Caret Line="85" TopLine="65"/>
       </Position2>
       <Position3>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="58" Column="23" TopLine="49"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Caret Line="113" Column="28" TopLine="102"/>
       </Position3>
       <Position4>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="116" Column="29" TopLine="106"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Caret Line="20" Column="15" TopLine="11"/>
       </Position4>
       <Position5>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="115" Column="29" TopLine="103"/>
+        <Filename Value="testfpc_seralizeadapter_test.pas"/>
+        <Caret Line="99" Column="23" TopLine="95"/>
       </Position5>
       <Position6>
-        <Filename Value="..\fpc_seralizeadapter.pas"/>
-        <Caret Line="75" Column="16" TopLine="64"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="246" Column="65" TopLine="313"/>
       </Position6>
       <Position7>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="531" Column="46" TopLine="518"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="63" Column="24" TopLine="52"/>
       </Position7>
       <Position8>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="212" TopLine="200"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="313" Column="3" TopLine="308"/>
       </Position8>
       <Position9>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="213" TopLine="200"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="71" Column="31" TopLine="58"/>
       </Position9>
       <Position10>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="214" TopLine="200"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="276" Column="3" TopLine="269"/>
       </Position10>
       <Position11>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="535" TopLine="524"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="71" Column="17" TopLine="60"/>
       </Position11>
       <Position12>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="473" TopLine="461"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="275" Column="3" TopLine="269"/>
       </Position12>
       <Position13>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="475" TopLine="461"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="70" Column="15" TopLine="60"/>
       </Position13>
       <Position14>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="476" TopLine="461"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="250" Column="3" TopLine="244"/>
       </Position14>
       <Position15>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="479" TopLine="464"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="69" Column="15" TopLine="59"/>
       </Position15>
       <Position16>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="480" TopLine="464"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="231" Column="3" TopLine="226"/>
       </Position16>
       <Position17>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="481" TopLine="464"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="68" Column="15" TopLine="58"/>
       </Position17>
       <Position18>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="480" TopLine="464"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="214" Column="3" TopLine="209"/>
       </Position18>
       <Position19>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="483" TopLine="464"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="72" Column="35" TopLine="57"/>
       </Position19>
       <Position20>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="484" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="303" Column="5" TopLine="296"/>
       </Position20>
       <Position21>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="486" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="70" Column="15" TopLine="62"/>
       </Position21>
       <Position22>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="480" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="257" Column="26" TopLine="246"/>
       </Position22>
       <Position23>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="483" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="72" Column="15" TopLine="59"/>
       </Position23>
       <Position24>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="484" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="308" Column="39" TopLine="293"/>
       </Position24>
       <Position25>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="486" TopLine="471"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="71" Column="15" TopLine="61"/>
       </Position25>
       <Position26>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="489" TopLine="474"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="281" Column="25" TopLine="271"/>
       </Position26>
       <Position27>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="512" TopLine="501"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="71" Column="15" TopLine="60"/>
       </Position27>
       <Position28>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="514" TopLine="501"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="277" Column="3" TopLine="271"/>
       </Position28>
       <Position29>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="515" TopLine="501"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="73" Column="15" TopLine="60"/>
       </Position29>
       <Position30>
-        <Filename Value="..\pascalobject_seralize.pas"/>
-        <Caret Line="479" Column="38" TopLine="512"/>
+        <Filename Value="test_pascalobjectseralize.pas"/>
+        <Caret Line="334" TopLine="320"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="1">
+    <BreakPoints Count="3">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -438,6 +439,20 @@
         <Source Value="..\pascalobject_seralize.pas"/>
         <Line Value="566"/>
       </Item1>
+      <Item2>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="testfpc_seralizeadapter_test.pas"/>
+        <Line Value="70"/>
+      </Item2>
+      <Item3>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="test_pascalobjectseralize.pas"/>
+        <Line Value="334"/>
+      </Item3>
     </BreakPoints>
     <Watches Count="8">
       <Item1 ClassAutoCast="True">

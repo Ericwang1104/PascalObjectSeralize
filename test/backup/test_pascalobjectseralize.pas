@@ -327,7 +327,7 @@ begin
   IAdp :=TFPCXmlAdapter.Create;
   try
     fr.Adapter :=IAdp;
-    fr.ReadFileToObject(SampleDataPath+'testcollection.XML',coll);
+    fr.ReadFileToObject(SampleDataPath+'testcollection.Json',coll);
     checkequals(Coll.datacollectionName,'TestDataName');
     Item :=Coll.DataItem[0];
 
