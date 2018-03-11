@@ -3,3 +3,12 @@
 *.exe
 *.dbg
 *.or
+lib/ 
+DEBUG/
+RELEASE/
+__history/
+*.dcu
+*.json
+*.png
+*.xml
+*.bak

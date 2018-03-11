@@ -43,7 +43,7 @@ type
   [Data_ADAPTER_INTERFACE]
     function NewDoc:IDataNode;
     function GetRootNode: IDataNode;
-    function GetSeralzieString: string;
+    function GetSeralzieString: string; stdcall;
     procedure LoadFromFile(const FileName:string);
     procedure SaveToFile(const FileName:string);
     property RootNode:IDataNode read GetRootNode;

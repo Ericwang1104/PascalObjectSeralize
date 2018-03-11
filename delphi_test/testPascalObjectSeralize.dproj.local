@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/03/08 10:58:29.000.573,=E:\GitHub\PascalObjectSeralize\delphi_test\Testpascalobject_seralize.pas</Transaction>
+    <Transaction>2018/03/08 10:58:48.000.293,=E:\GitHub\PascalObjectSeralize\JsonDataObjects.pas</Transaction>
+    <Transaction>2018/03/08 10:58:48.000.536,=E:\GitHub\PascalObjectSeralize\pascalobject_seralize.pas</Transaction>
+    <Transaction>2018/03/08 10:58:48.000.096,=E:\GitHub\PascalObjectSeralize\intf_seralizeadapter.pas</Transaction>
+    <Transaction>2018/03/08 11:01:19.000.774,=E:\GitHub\PascalObjectSeralize\delphi_test\Unit1.pas</Transaction>
+    <Transaction>2018/03/08 11:01:31.000.644,E:\GitHub\PascalObjectSeralize\delphi_test\Unit1.pas=E:\GitHub\PascalObjectSeralize\delphi_test\frm_test.pas</Transaction>
+    <Transaction>2018/03/08 11:01:31.000.644,E:\GitHub\PascalObjectSeralize\delphi_test\Unit1.dfm=E:\GitHub\PascalObjectSeralize\delphi_test\frm_test.dfm</Transaction>
+    <Transaction>2018/03/08 11:03:24.000.533,=E:\GitHub\PascalObjectSeralize\delphi_seralizeadapter.pas</Transaction>
+    <Transaction>2018/03/09 07:50:25.000.553,E:\GitHub\PascalObjectSeralize\delphi_test\testPascalObjectSeralize.dproj=E:\GitHub\PascalObjectSeralize\delphi_test\PascalObjectSeralize.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -8,7 +8,6 @@ test_pascalobjectseralize, frm_Test;
 {$R *.res}
 
 begin
-  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TGuiTestRunner, TestRunner);
   Application.CreateForm(TfrmTest, frmTest);

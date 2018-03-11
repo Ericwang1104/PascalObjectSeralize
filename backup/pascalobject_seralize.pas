@@ -469,7 +469,7 @@ var
   Obj: TObject;
 begin
   //intPropCount :=GetTypeData(Instance.ClassInfo).
-  intPropCount :=GetpropList(Instance,PList);
+  intPropCount =GetpropList(Instance,PList);
   GetMem(PList, intPropCount * SizeOf(Pointer));
  // intPropCount =GetpropList(Instance,PList);
   try
