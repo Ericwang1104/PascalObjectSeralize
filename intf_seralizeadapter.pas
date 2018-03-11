@@ -14,16 +14,17 @@ type
 
   { IDataNode }
 
-  IDataNode=Interface(IUnknown)
+  IDataNode=Interface(IInterface)
   [DATA_NODE_INTERFACE]
     function GetAttributes(Name: string): string;
     function GetChildItem(Index:integer): IDataNode;
+    function GetDumpText: string;
     function GetNodeName: string;
     function GetValue: variant;
     procedure SetAttributes(Name: string; AValue: string);
     procedure SetNodeName(AValue: string);
     procedure SetValue(AValue: variant);
-    function AddChild(const Name:string):IDataNode;
+    function AddChild():IDataNode;
     function AddPropObj(const Name: string): IDataNode;
     function ChildCount:integer;
     function PropObjByName(const Name:string): IDataNode;
@@ -35,11 +36,12 @@ type
     property NodeName:string read GetNodeName write SetNodeName;
     property Value:variant read GetValue write SetValue;
     property Attributes[Name:string]:string read GetAttributes write SetAttributes;
+    property DumpText:string read GetDumpText;
   end;
 
   { IDataAdapter }
 
-  IDataAdapter=interface(IUnknown)
+  IDataAdapter=interface(IInterface)
   [Data_ADAPTER_INTERFACE]
     function NewDoc:IDataNode;
     function GetRootNode: IDataNode;

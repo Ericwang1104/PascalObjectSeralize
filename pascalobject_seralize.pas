@@ -2,7 +2,7 @@ unit pascalobject_seralize;
 
 interface
 
-uses  Classes,TypInfo,graphics,  Variants, SysUtils,
+uses  Classes,TypInfo,graphics,  Variants, SysUtils,StrUtils,
 {$IFDEF  FPC}
   base64,dbugintf,
 {$ELSE}
@@ -252,7 +252,7 @@ begin
     for I := 0 to Comp.ComponentCount-1 do
     begin
       CompChild :=comp.Components[I];
-      Child :=Node.AddChild(CompChild.Name);
+      Child :=Node.AddChild;
       WriteNodeData(CompChild,Child);
 
     end;
@@ -275,7 +275,10 @@ begin
         begin
           ObjNOde := Node.AddPropObj(string(Prop^.Name));
           if Assigned(PropObj) then
+          begin
             WriteNodeData(TPersistent(PropObj), ObjNOde);
+            WriteObject(Prop,ObjNode,PropObj);
+          end
         end
         else
         begin
@@ -339,7 +342,7 @@ begin
     for I := 0 to (Obj as TCollection).Count - 1 do
     begin
       PropObj := (Obj as TCollection).Items[I];
-      Child := Node.AddChild('Item');
+      Child := Node.AddChild();
       WriteNodeData((PropObj as TPersistent), Child);
     end;
   end else
@@ -348,7 +351,7 @@ begin
     for I := 0 to (obj as TComponent).ComponentCount-1 do
     begin
       Comp:=(obj as TComponent).Components[I];
-      Child :=Node.AddChild('component');
+      Child :=Node.AddChild();
       WriteNodeData(Comp,Child);
     end;
   end;
@@ -469,9 +472,10 @@ var
   Obj: TObject;
 begin
   //intPropCount :=GetTypeData(Instance.ClassInfo).
-  intPropCount :=GetpropList(Instance,PList);
+  intPropCount := GetTypeData(Instance.ClassInfo)^.PropCount;
   GetMem(PList, intPropCount * SizeOf(Pointer));
  // intPropCount =GetpropList(Instance,PList);
+
   try
     for intI := 0 to GetPropList(Instance.ClassInfo, tkValue, PList,
       False) - 1 do
@@ -492,6 +496,7 @@ begin
         if (Obj is TPersistent) and Assigned(PropNode) then
         begin
           ReadSeralizeObject(Obj as TPersistent, PropNode, PProp);
+          ReadObject(Obj,PropNode);
         end
         else if Assigned(PropNode) then
         begin
@@ -507,8 +512,9 @@ begin
     FreeMem(PList, intPropCount * SizeOf(Pointer));
   end;
   ReadChildObject(Instance, Node);
-  intPropCount := GetTypeData(Instance.ClassInfo)^.PropCount;
-end;
+
+
+ end;
 
 procedure TObjectReader.ReadChildObject(Obj: TPersistent; Node: IDataNode);
 var
@@ -536,9 +542,9 @@ begin
     for I := 0 to comp.ComponentCount-1 do
     begin
       Compchild :=comp.Components[I];
-
       ChildNode :=Node.ChildItem[I];
-      ReadPersistentFromNode(ChildNode,compChild);
+      //ReadPersistentFromNode(ChildNode,compChild);
+      ReadPersistentFromNode(ChildNode,CompChild);
     end;
   end;
 
@@ -564,15 +570,17 @@ end;
 
 procedure TObjectReader.ReadNodeToObject(const Node: IDataNode;
   Obj: TPersistent);
+
 begin
   ReadPersistentFromNode(Node, Obj);
 end;
 
 procedure TObjectReader.ReadFileToObject(const FileName: string;
   Obj: TPersistent);
+
 begin
   FIAdp.LoadFromFile(FileName);
- self.ReadNodeToObject(Fiadp.RootNode,Obj);
+ self.ReadNodeToObject(FIAdp.RootNode,Obj);
 end;
 
 procedure TObjectReader.SetSeralizePropValue(Obj: TPersistent; Value: Variant;
@@ -646,8 +654,10 @@ begin
   try
     //第0项用于保存 数据data
     str :=Node.Value;
+
     Base64StringToStream(MEM,Node.DATA);
     MEm.Position:=0;
+    Pic.LoadFromStream(MEM);
     //Pic.LoadFromStream(MEM);
   finally
     FreeAndNil(Mem);
@@ -679,6 +689,7 @@ begin
     exit;
   Mem := TMemoryStream.Create;
   try
+    mem.Position :=0;
     Obj.SaveToStream(Mem);
     Node.DATA :=StreamToBase64String(Mem);
   finally
@@ -716,7 +727,7 @@ var
 begin
   for intI := 0 to Obj.Count - 1 do
   begin
-    Child := Node.AddChild('StringItem');
+    Child := Node.AddChild();
     Child.Value := Obj.Strings[intI];
   end;
 end;

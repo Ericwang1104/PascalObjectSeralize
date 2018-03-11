@@ -226,7 +226,7 @@ begin
   frm :=TfrmTest.Create(nil);
   try
   fW.Adapter :=Iadp;
-  frm.Image1.Picture.LoadFromFile('E:\GitHub\PascalObjectSeralize\testdata\'+'test.png');
+ // frm.Image1.Picture.LoadFromFile('E:\GitHub\PascalObjectSeralize\testdata\'+'test.png');
   frm.ShowModal;
   fw.WriteObjectToFile(SampleDataPath+'test.json',frm);
   finally

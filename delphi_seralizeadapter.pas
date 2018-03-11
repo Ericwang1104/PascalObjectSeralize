@@ -8,7 +8,7 @@ uses
 type
   TDJsonNode = class(TInterfacedObject, IDataNode)
     strict private
-    function AddChild(const Name:string): IDataNode;
+    function AddChild: IDataNode;
     function AddPropObj(const Name: string): IDataNode;
     function PropObjByName(const Name:string): IDataNode;
     function ChildCount: integer;
@@ -21,6 +21,7 @@ type
     procedure SetData(AValue: string);
     procedure SetNodeName(AValue: string);
     procedure SetValue(AValue: variant);
+    function GetDumpText:string;
     private
     protected
     fDoc: TJsonObject;
@@ -90,11 +91,13 @@ begin
 
 end;
 
-function TDJsonNode.AddChild(const Name: string): IDataNode;
+function TDJsonNode.AddChild: IDataNode;
 var
   JObj:TJsonObject;
+  Arr:TJsonArray;
 begin
-  JObj :=FJSon.A[Name].AddObject;
+  Arr :=FJSon.A['ITEMS'];
+  Jobj :=Arr.AddObject;
   Result :=BuildDataNode(JObj);
 end;
 
@@ -102,7 +105,7 @@ function TDJsonNode.AddPropObj(const Name: string): IDataNode;
 var
   JObj:TJsonObject;
 begin
-  JObj :=FJSon.O[Name];
+  JObj :=FJSon.O[LowerCase(Name)];
   Result :=BuildDataNode(JObj);
 end;
 
@@ -121,7 +124,7 @@ function TDJsonNode.PropObjByName(const Name:string): IDataNode;
 var
   JObj:TJsonObject;
 begin
-  JObj :=FJSon.O[Name];
+  JObj :=FJSon.O[LowerCase(Name)];
   if Assigned(JObj) then
   begin
     result :=BuildDataNode(JObj)
@@ -133,7 +136,7 @@ end;
 
 function TDJsonNode.ChildCount: integer;
 begin
-  Result :=FJSon.A['child'].Count;
+  Result :=FJSon.A['ITEMS'].Count;
 end;
 
 function TDJsonNode.GetAttributes(Name: string): string;
@@ -145,13 +148,18 @@ function TDJsonNode.GetChildItem(Index: integer): IDataNode;
 var
   Obj:TJsonObject;
 begin
-  Obj :=FJSon.A['child'].Items[Index]^.ObjectValue;
+  Obj :=FJSon.A['ITEMS'].O[Index];
   result :=BuildDataNode(Obj);
 end;
 
 function TDJsonNode.GetData: string;
 begin
   result :=FJSon.Values['cdata'].Value;
+end;
+
+function TDJsonNode.GetDumpText: string;
+begin
+  result :=FJSon.ToJSON(true);
 end;
 
 function TDJsonNode.GetNodeName: string;
